@@ -3,8 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # or the branch you are using to deploy
-  
+      - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,20 +12,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
-      - name: Set up Node.js (if needed)
+
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-      
-      - name: Install dependencies
-        run: npm install  # or any other command if you're using a different package manager
 
-      - name: Build the project (if needed)
-        run: npm run build  # or the build command that applies to your project
+      - name: Install dependencies
+        run: npm install  # Install dependencies from package.json
+
+      - name: Build the project
+        run: npm run build  # Build your project (adjust the command as needed)
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # This is where GitHub Pages serves from
-          folder: build  # This folder contains the built site (can be 'dist' or other depending on your setup)
+          branch: gh-pages
+          folder: build  # The directory that holds the built files
